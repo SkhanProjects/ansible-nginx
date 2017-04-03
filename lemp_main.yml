@@ -1,0 +1,45 @@
+---
+
+
+- hosts: all
+  become: true
+  remote_user: vagrant
+
+  
+  
+      
+      
+
+
+  tasks:
+    - name: Update apt cache
+      apt: update_cache=yes
+
+    - name: Install NGINX, PHP, Mysql
+      apt: name={{item}} state=present
+
+      with_items:
+          - nginx 
+          - php5-fpm
+          - php5-mysql
+          - mysql-server
+          - php5-mcrypt
+          - php5-gd
+          - php5-curl
+
+    
+
+    - name: Restart NGINX 
+      service: name=nginx state=restarted
+      
+
+
+
+
+
+
+
+
+
+
+
